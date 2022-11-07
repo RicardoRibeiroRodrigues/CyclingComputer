@@ -92,7 +92,7 @@ A partir do feedback do Luiz, foi feito algumas alterações na interface, como:
 <br>
 
 Nesta iteração, foi decidido também as fontes e tamanhos utilizados na interface:
-- Para o logo, foi utilizado a fonte **CONTINUAR DAQUI**
+- Para o logo, foi utilizado a fonte Raleway Medium Alt1 e para o resto da interface foi utilizado a fonte Montserrat Alternates Extralight 200. Tais fontes são futuristas que remetem à tecnologia e são unidas com a simplicidade e design limpo e leve do preto no branco. Dessa forma, é mantido um padrão de duas fontes sans-serif em preto no branco, facilitando a leitura para o usuário no meio de uma viagem de bike.
 
 ### Proposta UX 3 - A
 
