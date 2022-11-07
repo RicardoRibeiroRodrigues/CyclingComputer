@@ -111,3 +111,6 @@ Detalhes da terceira interação da proposta de interface:
 
 
 - Vídeo 
+#### **Video da segunda entrevista**
+
+[![Thumbnail do video](http://img.youtube.com/vi/17jwVoU1Gq0/0.jpg)](https://youtu.be/17jwVoU1Gq0 "Video da entrevista 2")
