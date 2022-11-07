@@ -62,10 +62,8 @@ Nome da marca:
 
 Detalhes da segunda interação da proposta de interface:
 
-<!-- 
- Adicionar texto descrevendo a evolução 
- da interface
--->
+#### **Video da entrevista com o Luiz**
+[![Thumbnail do video](http://img.youtube.com/vi/wxNL9mVSqio/0.jpg)](https://youtu.be/wxNL9mVSqio "Video entrevista com o Luiz do FabLab")
 
 A partir do feedback do Luiz, foi feito algumas alterações na interface, como:
 - Maior aproveitamento do espaço da tela, deixando velocidade e botões com mais espaço.
