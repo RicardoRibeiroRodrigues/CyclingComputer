@@ -10,29 +10,47 @@ Mais detalhes no site da disciplina:
 
 Integrantes:
 
-- Nome 
-- Nome
+- Ricardo Ribeiro Rodrigues
+- Guilherme Fontana Louro
 
 Nome da marca:
 
-- Nome e logo?
+- Bikometro
+
+![Logo](imgs/logo.png)
 
 ## Interface
 
 ### Proposta UX 1 - C
 
-> - Mockup da interface:
->    - Satisfaz todos os requisitos do projeto
->    - Indica quais são os widgets do LVGL 
->    - Apresentar uma foto da interface sendo executada no LCD (imagem estática)
-> - Grava um vídeo explicando a interface
+#### **Primeira proposta de interface**
+
+![Primeira proposta de inteface](imgs/print_interface.png)
+
+#### **Widgets a serem utilizados**
+
+- Para botões, iremos utilizar **Image button (lv_imgbtn)** para utilizar icones como botões.
+- Para a unidade escolhida na segunda tela, será utilizado **Switch (lv_switch)**.
+- Será utilizado **Image (lv_img)** para o logo.
+- Para texto, será utilizado **Label (lv_label)**.
 
 
-Descricão da primeira proposta da interface:
+#### **Interface executada no LCD**
 
-- Imagem da proposta
-- Imagem da proposta no LCD
-- Vídeo explicando a interface
+<br>
+
+<div style="display: flex; flex-direction: row; justify-content: space-between;">
+
+<img src="imgs/interface_lcd.jpg" alt="Primeira tela da interface no LCD" style="height: 600px;"/>
+<img src="imgs/interface_2_lcd.jpg" alt="Segunda tela da interface no LCD" style="height: 600px;"/>
+
+</div>
+
+<br>
+
+#### **Video explicando a interface**
+
+[![Thumbnail do video](http://img.youtube.com/vi/sO3GiMtXU0I/0.jpg)](https://youtu.be/sO3GiMtXU0I "Video explicando a interface")
 
 ### Proposta UX 2 - B
 
@@ -49,9 +67,32 @@ Detalhes da segunda interação da proposta de interface:
  da interface
 -->
 
-- Imagem da proposta
-- Imagem da proposta no LCD
-- Vídeo
+A partir do feedback do Luiz, foi feito algumas alterações na interface, como:
+- Maior aproveitamento do espaço da tela, deixando velocidade e botões com mais espaço.
+- Adiciona a possivibilidade de alternar entre as unidades de medida (cm/polegadas).
+- Os botões de alterar o aro da bicicleta alternam entre valores predefinidos.
+- O valor atual do aro da bicicleta é mostrado na tela.
+- Adicionado botão para voltar para tela inicial na segunda tela.
+
+#### **Imagem da proposta 2**
+
+![Imagem da proposta 2](imgs/print_interface_2.png)
+
+#### **Interface da proposta 2 executada no LCD**
+
+<br>
+
+<div style="display: flex; flex-direction: row; justify-content: space-between;">
+
+<img src="imgs/interface_p2_lcd.jpeg" alt="Primeira tela da segunda interface no LCD" style="height: 600px;"/>
+<img src="imgs/interface_2p2_lcd.jpg" alt="Segunda tela da segunda interface no LCD" style="height: 600px;"/>
+
+</div>
+
+<br>
+
+Nesta iteração, foi decidido também as fontes e tamanhos utilizados na interface:
+- Para o logo, foi utilizado a fonte **CONTINUAR DAQUI**
 
 ### Proposta UX 3 - A
 
@@ -68,6 +109,5 @@ Detalhes da terceira interação da proposta de interface:
  da interface
 -->
 
-- Imagem da proposta
-- Imagem da proposta no LCD
+
 - Vídeo 
