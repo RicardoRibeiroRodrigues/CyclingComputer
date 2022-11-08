@@ -68,6 +68,10 @@ A partir do feedback do Luiz, foi feito algumas alterações na interface, como:
 - O valor atual do aro da bicicleta é mostrado na tela.
 - Adicionado botão para voltar para tela inicial na segunda tela.
 
+**Vídeo explicando a iteração 1:**
+
+[![Thumbnail do video](http://img.youtube.com/vi/9kr88faDkCg/0.jpg)](https://youtu.be/9kr88faDkCg "Video iteração 1")
+
 #### **Imagem da proposta 2**
 
 ![Imagem da proposta 2](imgs/print_interface_2.png)
@@ -106,6 +110,10 @@ A partir do feedback do entrevistado, foram feitas algumas alterações:
 - Para poder fazer esse cálculo, foi adicionado um campo para o usuário registrar seu peso, conferindo maior precisão ao cálculo das calorias.
 - Adicionado também um campo para registrar o horário atual, para o horário ser mostrado corretamente no display.
 - Alguns reposicionamentos e melhor aproveitamento da tela.
+
+**Vídeo explicando a iteração 2:**
+
+[![Thumbnail do video](http://img.youtube.com/vi/wQOLhSUcS_8/0.jpg)](https://youtu.be/wQOLhSUcS_8"Video iteração 2")
 
 #### **Cores**
 
