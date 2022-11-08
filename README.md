@@ -33,6 +33,8 @@ Nome da marca:
 - Para a unidade escolhida na segunda tela, será utilizado **Switch (lv_switch)**.
 - Será utilizado **Image (lv_img)** para o logo.
 - Para texto, será utilizado **Label (lv_label)**.
+- Para a escolha do aro, será utilizado o **Roller (lv_roller)**.
+- Para o input do peso, será utilizado o **Slider (lv_slider)**.
 
 
 #### **Interface executada no LCD**
@@ -83,7 +85,7 @@ A partir do feedback do Luiz, foi feito algumas alterações na interface, como:
 
 <br>
 
-Nesta iteração, foi decidido também as fontes e tamanhos utilizados na interface:
+Nesta iteração, foi decidido também as **fontes e tamanhos** utilizados na interface:
 - Para o logo, foi utilizado a [**fonte Raleway Medium Alt1**](https://fonts.google.com/specimen/Raleway)
 - Para o resto da interface foi utilizado a fonte [**Montserrat Alternates Extralight 200**](https://fonts.google.com/specimen/Montserrat+Alternates?category=Sans+Serif&preview.text=Viagem%20atual&preview.text_type=custom). 
 
@@ -91,10 +93,7 @@ Tais fontes são futuristas que remetem à tecnologia e são unidas com a simpli
 
 ### Proposta UX 3 - A
 
-> - Especifica e justifica as cores a serem usadas na interface
->     - Grava em vídeo a entrevista
 > - Grava um vídeo atualizado explicando o que foi sugerido e o que fizeram para melhorar a interface
-> - Apresentar uma foto da interface sendo executada no LCD (imagem estática)
 
 Detalhes da terceira interação da proposta de interface:
 
@@ -108,7 +107,24 @@ A partir do feedback do entrevistado, foram feitas algumas alterações:
 - Adicionado também um campo para registrar o horário atual, para o horário ser mostrado corretamente no display.
 - Alguns reposicionamentos e melhor aproveitamento da tela.
 
+#### **Cores**
+
+Para a interface do ciclocomputador, optamos por apostar no preto e branco, que é muito utilizado em interfaces modernas, e traz uma leveza para a interface, tornando-a menos carregada. Pensando nisso, e na indentidade visual moderna da marca, foi preferido este contraste.
+
 #### **Imagem da proposta 3**
 
 ![Imagem da proposta 3](imgs/print_interface_3.png)
+
+#### **Interface da proposta 3 executada no LCD**
+
+<br>
+
+<div style="display: flex; flex-direction: row; justify-content: space-between;">
+
+<img src="imgs/interface_p3_lcd.jpeg" alt="Primeira tela da terceira interface no LCD" style="height: 600px;"/>
+<img src="imgs/interface_2p3_lcd.jpg" alt="Segunda tela da terceira interface no LCD" style="height: 600px;"/>
+
+</div>
+
+<br>
 
