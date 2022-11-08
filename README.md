@@ -113,7 +113,7 @@ A partir do feedback do entrevistado, foram feitas algumas alterações:
 
 **Vídeo explicando a iteração 2:**
 
-[![Thumbnail do video](http://img.youtube.com/vi/wQOLhSUcS_8/0.jpg)](https://youtu.be/wQOLhSUcS_8"Video iteração 2")
+[![Thumbnail do video](http://img.youtube.com/vi/wQOLhSUcS_8/0.jpg)](https://youtu.be/wQOLhSUcS_8 "Video iteração 2")
 
 #### **Cores**
 
