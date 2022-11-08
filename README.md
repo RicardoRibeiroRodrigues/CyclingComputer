@@ -95,9 +95,10 @@ Nesta iteração, foi decidido também as **fontes e tamanhos** utilizados na in
 
 Tais fontes são futuristas que remetem à tecnologia e são unidas com a simplicidade e design limpo e leve do preto no branco. Dessa forma, é mantido um padrão de duas fontes sans-serif em preto no branco, facilitando a leitura para o usuário no meio de uma viagem de bike.
 
-### Proposta UX 3 - A
+**Na imagem abaixo, podemos ver uma foto monstrando os tamanhos e fontes na interface**.
+![Fontes e tamanhos na interface](imgs/fontes_e_tamanhos.PNG)
 
-> - Grava um vídeo atualizado explicando o que foi sugerido e o que fizeram para melhorar a interface
+### Proposta UX 3 - A
 
 Detalhes da terceira interação da proposta de interface:
 
