@@ -54,12 +54,6 @@ Nome da marca:
 
 ### Proposta UX 2 - B
 
-> - Especifica e justifica quais vão ser as fontes (e tamanhos) a serem usadas na interface.
-> - Pega feedback com o Luiz do Fablab e incorpora na interface
->   - Grava em vídeo a entrevista
-> - Grava um vídeo atualizado explicando o que foi sugerido e o que fizeram para melhorar a interface
-> - Apresentar uma foto da interface sendo executada no LCD (imagem estática)
-
 Detalhes da segunda interação da proposta de interface:
 
 #### **Video da entrevista com o Luiz**
@@ -90,25 +84,31 @@ A partir do feedback do Luiz, foi feito algumas alterações na interface, como:
 <br>
 
 Nesta iteração, foi decidido também as fontes e tamanhos utilizados na interface:
-- Para o logo, foi utilizado a fonte Raleway Medium Alt1 e para o resto da interface foi utilizado a fonte Montserrat Alternates Extralight 200. Tais fontes são futuristas que remetem à tecnologia e são unidas com a simplicidade e design limpo e leve do preto no branco. Dessa forma, é mantido um padrão de duas fontes sans-serif em preto no branco, facilitando a leitura para o usuário no meio de uma viagem de bike.
+- Para o logo, foi utilizado a [**fonte Raleway Medium Alt1**](https://fonts.google.com/specimen/Raleway)
+- Para o resto da interface foi utilizado a fonte [**Montserrat Alternates Extralight 200**](https://fonts.google.com/specimen/Montserrat+Alternates?category=Sans+Serif&preview.text=Viagem%20atual&preview.text_type=custom). 
+
+Tais fontes são futuristas que remetem à tecnologia e são unidas com a simplicidade e design limpo e leve do preto no branco. Dessa forma, é mantido um padrão de duas fontes sans-serif em preto no branco, facilitando a leitura para o usuário no meio de uma viagem de bike.
 
 ### Proposta UX 3 - A
 
 > - Especifica e justifica as cores a serem usadas na interface
-> - Pega feedback com mais uma pessoa externa e incorpora na interface
 >     - Grava em vídeo a entrevista
 > - Grava um vídeo atualizado explicando o que foi sugerido e o que fizeram para melhorar a interface
 > - Apresentar uma foto da interface sendo executada no LCD (imagem estática)
 
 Detalhes da terceira interação da proposta de interface:
 
-<!-- 
- Adicionar texto descrevendo a evolução 
- da interface
--->
-
-
-- Vídeo 
 #### **Video da segunda entrevista**
 
 [![Thumbnail do video](http://img.youtube.com/vi/17jwVoU1Gq0/0.jpg)](https://youtu.be/17jwVoU1Gq0 "Video da entrevista 2")
+
+A partir do feedback do entrevistado, foram feitas algumas alterações:
+- Foi adicionada uma parte na interface para mostrar as calorias queimadas no trajeto.
+- Para poder fazer esse cálculo, foi adicionado um campo para o usuário registrar seu peso, conferindo maior precisão ao cálculo das calorias.
+- Adicionado também um campo para registrar o horário atual, para o horário ser mostrado corretamente no display.
+- Alguns reposicionamentos e melhor aproveitamento da tela.
+
+#### **Imagem da proposta 3**
+
+![Imagem da proposta 3](imgs/print_interface_3.png)
+
