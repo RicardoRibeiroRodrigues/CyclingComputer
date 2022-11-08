@@ -121,7 +121,7 @@ Para a interface do ciclocomputador, optamos por apostar no preto e branco, que 
 
 <div style="display: flex; flex-direction: row; justify-content: space-between;">
 
-<img src="imgs/interface_p3_lcd.jpeg" alt="Primeira tela da terceira interface no LCD" style="height: 600px;"/>
+<img src="imgs/interface_p3_lcd.jpg" alt="Primeira tela da terceira interface no LCD" style="height: 600px;"/>
 <img src="imgs/interface_2p3_lcd.jpg" alt="Segunda tela da terceira interface no LCD" style="height: 600px;"/>
 
 </div>
