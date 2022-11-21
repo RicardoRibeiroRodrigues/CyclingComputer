@@ -854,6 +854,7 @@
     <Folder Include="src\ASF\thirdparty\lvgl8\tests\unity\" />
     <Folder Include="src\ASF\thirdparty\lvgl8\zephyr\" />
     <Folder Include="src\config\" />
+    <Folder Include="src\components" />
     <Folder Include="src\touch\" />
   </ItemGroup>
   <ItemGroup>
@@ -2264,7 +2265,16 @@
     <Compile Include="src\ASF\thirdparty\lvgl8\tests\unity\unity_support.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\components\header_footer.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\components\header_footer.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\config\conf_touch.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\MontAltEL58.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\touch\touch.c">
