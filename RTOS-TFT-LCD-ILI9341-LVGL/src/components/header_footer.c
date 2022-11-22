@@ -7,18 +7,52 @@
 #include "header_footer.h"
 
 
-void create_header(lv_obj_t * screen) {
+void create_header(lv_obj_t * screen, const lv_img_dsc_t *logo, const lv_font_t *MontAltEL58) {
 	static lv_style_t sevenSegStyle;
 	lv_style_init(&sevenSegStyle);
 	lv_style_set_border_width(&sevenSegStyle, 0);
-	lv_style_set_text_color(&sevenSegStyle, lv_color_white());
+	lv_style_set_text_color(&sevenSegStyle, lv_color_black());
 	// Label clock
 	labelClockHeader = lv_label_create(screen);
-	lv_obj_align(labelClockHeader, LV_ALIGN_TOP_RIGHT, -10, 10);
+	lv_obj_align(labelClockHeader, LV_ALIGN_TOP_RIGHT, -5, 5);
 	lv_obj_add_style(labelClockHeader, &sevenSegStyle, 0);
 	// 0123456789:., PesokgHrárim/hclVatu
-	// lv_obj_set_style_text_font(labelClockHeader, &mont_alt_el_58, LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(labelClockHeader, MontAltEL58, LV_STATE_DEFAULT);
 	lv_label_set_text_fmt(labelClockHeader, "%02d:%02d:02d", 14, 2, 10);
+	// ------------------------ Logo ------------------------
+	lv_obj_t * img = lv_img_create(screen);
+	lv_img_set_src(img, logo);
+	lv_obj_align(img, LV_ALIGN_TOP_LEFT, 3, 5);
+	
+	// Linha divisora
+	static lv_style_t style_line;
+	lv_style_init(&style_line);
+	lv_style_set_line_width(&style_line, 2);
+	lv_style_set_bg_color(&style_line, lv_color_white());
+	lv_style_set_line_color(&style_line, lv_color_black());
+	lv_style_set_line_rounded(&style_line, true);
+
+	// Um dos maiores misterios da humanidade -> O y = 0 está na metade da tela
+	static lv_point_t line_points[] = { {0, 0}, {240, 0} };
+	lv_obj_t * line1;
+	line1 = lv_line_create(screen);
+	lv_line_set_points(line1, line_points, 2);     /*Set the points*/
+	lv_obj_add_style(line1, &style_line, 0);
+	lv_obj_center(line1);
+}
+
+void settings_handler(lv_event_t *e) {
+	lv_event_code_t code = lv_event_get_code(e);
+	
+	if(code == LV_EVENT_CLICKED) {
+		LV_LOG_USER("Clicked");
+	}
+	else if(code == LV_EVENT_VALUE_CHANGED) {
+		LV_LOG_USER("Toggled");
+	}
+}
+
+void create_footer(lv_obj_t * screen) {
 	
 	// Linha divisora
 	static lv_style_t style_line;
@@ -26,12 +60,31 @@ void create_header(lv_obj_t * screen) {
 	lv_style_set_line_width(&style_line, 2);
 	lv_style_set_line_color(&style_line, lv_color_black());
 	lv_style_set_line_rounded(&style_line, true);
-
-	 
-	static lv_point_t line_points[] = { {10, 0}, {10, 240} };
+	
+	static lv_point_t line_points[] = { {0, 240}, {240, 240} };
 	lv_obj_t * line1;
 	line1 = lv_line_create(screen);
 	lv_line_set_points(line1, line_points, 2);     /*Set the points*/
 	lv_obj_add_style(line1, &style_line, 0);
 	lv_obj_center(line1);
+	
+	
+	// -------------------- Engrenagem --------------------
+	static lv_style_t style;
+	lv_style_init(&style);
+	lv_style_set_bg_color(&style, lv_color_white());
+	lv_style_set_border_color(&style, lv_color_white());
+	lv_style_set_border_width(&style, 0);
+	lv_style_set_text_color(&style, lv_color_black());
+	lv_style_set_outline_color(&style, lv_color_white());
+	
+	lv_obj_t *settings = lv_btn_create(screen);
+	lv_obj_add_event_cb(settings, settings_handler, LV_EVENT_ALL, NULL);
+	lv_obj_align(settings, LV_ALIGN_BOTTOM_RIGHT, -5, -5);
+	lv_obj_set_style_text_font(settings, &lv_font_montserrat_24, LV_STATE_DEFAULT);
+	lv_obj_add_style(settings, &style, 0);
+	
+	labelSettings = lv_label_create(settings);
+	lv_label_set_text(labelSettings, LV_SYMBOL_SETTINGS);
+	lv_obj_center(labelSettings);
 }

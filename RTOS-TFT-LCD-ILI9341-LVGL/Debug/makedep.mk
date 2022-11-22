@@ -622,6 +622,10 @@ src\ASF\thirdparty\lvgl8\tests\unity\unity_support.c
 
 src\components\header_footer.c
 
+src\MontAltEL20.c
+
+src\MontAltEL58.c
+
 src\touch\touch.c
 
 src\ASF\common\services\sleepmgr\sam\sleepmgr.c

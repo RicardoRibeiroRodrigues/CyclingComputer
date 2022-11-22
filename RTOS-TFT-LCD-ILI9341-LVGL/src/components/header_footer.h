@@ -11,9 +11,10 @@
 
 #include "lvgl.h"
 
-void create_header(lv_obj_t * screen);
+void create_header(lv_obj_t * screen, const lv_img_dsc_t *logo, const lv_font_t *MontAltEL58);
+void create_footer(lv_obj_t * screen);
 
-static lv_obj_t * labelClockHeader;
-
+static lv_obj_t *labelClockHeader;
+static lv_obj_t *labelSettings;
 
 #endif /* HEADER_FOOTER_H_ */

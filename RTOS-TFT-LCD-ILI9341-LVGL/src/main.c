@@ -8,6 +8,10 @@
 #include "lvgl.h"
 #include "touch/touch.h"
 #include "components/header_footer.h"
+#include "logo.h"
+
+LV_FONT_DECLARE(MontAltEL20);
+
 
 /************************************************************************/
 /* LCD / LVGL                                                           */
@@ -69,27 +73,6 @@ static void event_handler(lv_event_t * e) {
 	}
 }
 
-void lv_ex_btn_1(void) {
-	lv_obj_t * label;
-
-	lv_obj_t * btn1 = lv_btn_create(lv_scr_act());
-	lv_obj_add_event_cb(btn1, event_handler, LV_EVENT_ALL, NULL);
-	lv_obj_align(btn1, LV_ALIGN_CENTER, 0, -40);
-
-	label = lv_label_create(btn1);
-	lv_label_set_text(label, "Corsi");
-	lv_obj_center(label);
-
-	lv_obj_t * btn2 = lv_btn_create(lv_scr_act());
-	lv_obj_add_event_cb(btn2, event_handler, LV_EVENT_ALL, NULL);
-	lv_obj_align(btn2, LV_ALIGN_CENTER, 0, 40);
-	lv_obj_add_flag(btn2, LV_OBJ_FLAG_CHECKABLE);
-	lv_obj_set_height(btn2, LV_SIZE_CONTENT);
-
-	label = lv_label_create(btn2);
-	lv_label_set_text(label, "Toggle");
-	lv_obj_center(label);
-}
 
 /************************************************************************/
 /* TASKS                                                                */
@@ -103,7 +86,11 @@ static void task_lcd(void *pvParameters) {
 	scr2 = lv_obj_create(NULL);
 	lv_obj_clear_flag(scr1, LV_OBJ_FLAG_SCROLLABLE);
 	lv_obj_clear_flag(scr2, LV_OBJ_FLAG_SCROLLABLE);
-	create_header(scr1);
+	// Monta tela 1
+	lv_obj_set_style_bg_color(scr1, lv_color_white(), LV_PART_MAIN );
+	create_header(scr1, &logo, &MontAltEL20);
+	create_footer(scr1);
+	// Carrega na tela.
 	lv_scr_load(scr1);
 
 	for (;;)  {
