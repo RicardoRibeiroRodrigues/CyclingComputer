@@ -7,17 +7,17 @@
 #include "header_footer.h"
 
 
-void create_header(lv_obj_t * screen, const lv_img_dsc_t *logo, const lv_font_t *MontAltEL58) {
-	static lv_style_t sevenSegStyle;
-	lv_style_init(&sevenSegStyle);
-	lv_style_set_border_width(&sevenSegStyle, 0);
-	lv_style_set_text_color(&sevenSegStyle, lv_color_black());
+void create_header(lv_obj_t * screen, const lv_img_dsc_t *logo, const lv_font_t *MontAltEL20) {
+	static lv_style_t clockStyle;
+	lv_style_init(&clockStyle);
+	lv_style_set_border_width(&clockStyle, 0);
+	lv_style_set_text_color(&clockStyle, lv_color_black());
 	// Label clock
 	labelClockHeader = lv_label_create(screen);
 	lv_obj_align(labelClockHeader, LV_ALIGN_TOP_RIGHT, -5, 5);
-	lv_obj_add_style(labelClockHeader, &sevenSegStyle, 0);
+	lv_obj_add_style(labelClockHeader, &clockStyle, 0);
 	// 0123456789:., PesokgHrárim/hclVatu
-	lv_obj_set_style_text_font(labelClockHeader, MontAltEL58, LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(labelClockHeader, MontAltEL20, LV_STATE_DEFAULT);
 	lv_label_set_text_fmt(labelClockHeader, "%02d:%02d:02d", 14, 2, 10);
 	// ------------------------ Logo ------------------------
 	lv_obj_t * img = lv_img_create(screen);
