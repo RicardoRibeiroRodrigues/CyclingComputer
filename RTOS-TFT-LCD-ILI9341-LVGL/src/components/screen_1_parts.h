@@ -14,12 +14,17 @@
 // Seção de velocidade
 lv_obj_t *labelSpeedValue;
 static lv_obj_t *labelSpeedUnit;
+// Viagem
 static lv_obj_t *labelViagemText;
+lv_obj_t *labelViagemClock;
 // Div de distancia
 lv_obj_t *labelDistValue;
 static lv_obj_t *labelDistUnit;
 static lv_obj_t *labelDistTitle;
-
+// Div de vel media.
+lv_obj_t *labelVelMValue;
+static lv_obj_t *labelVelMUnit;
+static lv_obj_t *labelVelMTitle;
 
 
 

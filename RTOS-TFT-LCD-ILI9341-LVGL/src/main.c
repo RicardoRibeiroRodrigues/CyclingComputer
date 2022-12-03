@@ -10,6 +10,7 @@
 #include "components/header_footer.h"
 #include "logo.h"
 #include "components/screen_1_parts.h"
+#include "hardware.h"
 
 LV_FONT_DECLARE(MontAltEL20);
 
@@ -22,6 +23,15 @@ typedef struct  {
 	uint32_t minute;
 	uint32_t second;
 } calendar;
+
+typedef struct{
+	uint32_t hour;
+	uint32_t min;
+	uint32_t sec;	
+} viagem_time;
+
+#define PI 3.14159265359
+
 
 /************************************************************************/
 /* Prototypes                                                           */
@@ -78,6 +88,11 @@ extern void vApplicationMallocFailedHook(void) {
 
 // Semaforos e filas
 SemaphoreHandle_t xSemaphoreHorario;
+
+QueueHandle_t xPulseQueue;
+
+// Mutex
+SemaphoreHandle_t xMutex;
 
 /************************************************************************/
 /* Handlers/Callbacks                                                   */
@@ -145,8 +160,10 @@ static void task_lcd(void *pvParameters) {
 	lv_scr_load(scr1);
 
 	for (;;)  {
+		xSemaphoreTake( xMutex, portMAX_DELAY );
 		lv_tick_inc(50);
 		lv_task_handler();
+		xSemaphoreGive( xMutex );	
 		vTaskDelay(50);
 	}
 }
@@ -157,12 +174,120 @@ static void task_rtc(void *pvParameters) {
 	calendar rtc_initial = {2022, 11, 19, 12, 14, 01, 1};
 	RTC_init(RTC, ID_RTC, rtc_initial, RTC_IER_SECEN);
 	uint32_t current_hour, current_min, current_sec;
+	uint32_t dT;
+	char viagem_rodando = 1;
+	viagem_time v_time = {0, 0, 0};
+	float dist = 0.0;
+	const float raio = (float)(0.508/2.0);
+	float v_m = 0.0;
+	float t_in_hour = 0.0;
+	init_pins();
+	RTT_init(RTT_FREQ, 0, 0);
 	
 	while(1) {
 		if ((xSemaphoreTake(xSemaphoreHorario, 0) == pdTRUE)) {
 			rtc_get_time(RTC, &current_hour, &current_min, &current_sec);
+			xSemaphoreTake( xMutex, portMAX_DELAY );
 			lv_label_set_text_fmt(labelClockHeader, "%02d:%02d:%02d", current_hour, current_min, current_sec);
+			if (viagem_rodando) {
+				v_time.sec++;
+				if (v_time.sec >= 60) {
+					v_time.sec = 0;
+					v_time.min++;
+				}
+				if (v_time.min >= 60) {
+					v_time.min = 0;
+					v_time.hour++;
+				}
+				lv_label_set_text_fmt(labelViagemClock, "%02d:%02d", v_time.hour, v_time.min);
+			}
+			xSemaphoreGive( xMutex );
 		}
+		if (xQueueReceive(xPulseQueue, &dT, 0)) {
+			printf("dT: %d\n", dT);
+			// TODO: Colocar as coisas relacionadas a velocidade e viagem em outra task
+			
+			if (viagem_rodando)
+				dist += (2 * PI * raio) / 1000.0;
+			float dt_secs = ((float)dT / RTT_FREQ);
+			printf("dt_secs = %f\n", dt_secs);
+			float f = ((float) 1.0 / dt_secs);
+			float w = ((float)2 * PI * f);
+			float v =  ((float)w * raio) * 3.6;
+			if (viagem_rodando){
+				t_in_hour = v_time.hour + ((float)v_time.min/60.0) + ((float)v_time.sec/3600.0);
+				v_m = dist / (t_in_hour);
+			}
+			printf("V = %f\n", v);
+			xSemaphoreTake( xMutex, portMAX_DELAY );
+			lv_label_set_text_fmt(labelSpeedValue, "%.01f", v);
+			if (viagem_rodando) {
+				lv_label_set_text_fmt(labelDistValue, "%.01f", dist);
+				lv_label_set_text_fmt(labelVelMValue, "%.01f", v_m);				
+			}
+			xSemaphoreGive( xMutex );
+		}
+	}
+}
+#include "arm_math.h"
+
+#define TASK_SIMULATOR_STACK_SIZE (4096 / sizeof(portSTACK_TYPE))
+#define TASK_SIMULATOR_STACK_PRIORITY (tskIDLE_PRIORITY)
+
+#define RAIO 0.508/2
+#define VEL_MAX_KMH  5.0f
+#define VEL_MIN_KMH  0.5f
+//#define RAMP
+
+/**
+* raio 20" => 50,8 cm (diametro) => 0.508/2 = 0.254m (raio)
+* w = 2 pi f (m/s)
+* v [km/h] = (w*r) / 3.6 = (2 pi f r) / 3.6
+* f = v / (2 pi r 3.6)
+* Exemplo : 5 km / h = 1.38 m/s
+*           f = 0.87Hz
+*           t = 1/f => 1/0.87 = 1,149s
+*/
+float kmh_to_hz(float vel, float raio) {
+	float f = vel / (2*PI*raio*3.6);
+	return(f);
+}
+
+static void task_simulador(void *pvParameters) {
+
+	pmc_enable_periph_clk(ID_PIOC);
+	pio_set_output(PIOC, PIO_PC31, 1, 0, 0);
+
+	float vel = VEL_MAX_KMH;
+	float f;
+	int ramp_up = 1;
+
+	while(1){
+		pio_clear(PIOC, PIO_PC31);
+		delay_ms(1);
+		pio_set(PIOC, PIO_PC31);
+		#ifdef RAMP
+		if (ramp_up) {
+			printf("[SIMU] ACELERANDO: %d \n", (int) (10*vel));
+			vel += 0.5;
+			} else {
+			printf("[SIMU] DESACELERANDO: %d \n",  (int) (10*vel));
+			vel -= 0.5;
+		}
+		#endif
+
+		if (vel >= VEL_MAX_KMH)
+		ramp_up = 0;
+		else if (vel <= VEL_MIN_KMH)
+		ramp_up = 1;
+		#ifndef RAMP
+		vel = 5;
+		//printf("[SIMU] CONSTANTE: %d \n", (int) (10*vel));
+		#endif
+		f = kmh_to_hz(vel, RAIO);
+		int t = 965*(1.0/f); //UTILIZADO 965 como multiplicador ao invés de 1000
+		//para compensar o atraso gerado pelo Escalonador do freeRTOS
+		delay_ms(t);
 	}
 }
 
@@ -283,6 +408,14 @@ int main(void) {
 	if (xSemaphoreHorario == NULL) {
 		printf("Failed to create semaphore \n");
 	}
+	xMutex = xSemaphoreCreateMutex();
+	if (xMutex == NULL){
+		printf("Failed to create mutex\n");
+	}
+	xPulseQueue = xQueueCreate(32, sizeof(uint32_t));
+	if (xPulseQueue == NULL){
+		printf("Failed to create Queue\n");
+	}
 
 	/* Create task to control oled */
 	if (xTaskCreate(task_lcd, "LCD", TASK_LCD_STACK_SIZE, NULL, TASK_LCD_STACK_PRIORITY, NULL) != pdPASS) {
@@ -291,7 +424,9 @@ int main(void) {
 	if (xTaskCreate(task_rtc, "RTC", TASK_RTC_STACK_SIZE, NULL, TASK_RTC_STACK_PRIORITY, NULL) != pdPASS) {
 		printf("Failed to create lcd task\r\n");
 	}
-	
+	if (xTaskCreate(task_simulador, "SIMUL", TASK_SIMULATOR_STACK_SIZE, NULL, TASK_SIMULATOR_STACK_PRIORITY, NULL) != pdPASS) {
+		printf("Failed to create lcd task\r\n");
+	}
 	/* Start the scheduler. */
 	vTaskStartScheduler();
 
