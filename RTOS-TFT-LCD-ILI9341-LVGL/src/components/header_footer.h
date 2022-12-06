@@ -14,6 +14,8 @@
 void create_header(lv_obj_t * screen, const lv_img_dsc_t *logo, const lv_font_t *MontAltEL20);
 void create_footer(lv_obj_t * screen);
 
+extern void settings_handler(lv_event_t *e);
+
 lv_obj_t *labelClockHeader;
 static lv_obj_t *labelSettings;
 

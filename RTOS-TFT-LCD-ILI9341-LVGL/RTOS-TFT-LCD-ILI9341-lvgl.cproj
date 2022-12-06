@@ -2329,6 +2329,15 @@
     <Compile Include="src\MontAltEL80.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\play_pause_button.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\roda_logo.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\stop_button.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\touch\touch.c">
       <SubType>compile</SubType>
     </Compile>

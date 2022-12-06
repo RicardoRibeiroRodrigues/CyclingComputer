@@ -9,6 +9,9 @@
 #include "touch/touch.h"
 #include "components/header_footer.h"
 #include "logo.h"
+#include "roda_logo.h"
+#include "play_pause_button.h"
+#include "stop_button.h"
 #include "components/screen_1_parts.h"
 #include "hardware.h"
 
@@ -30,7 +33,17 @@ typedef struct{
 	uint32_t sec;	
 } viagem_time;
 
+enum screen {
+	SCR1,
+	SCR2
+};
+
 #define PI 3.14159265359
+
+/************************************************************************/
+/* Globals                                                              */
+/************************************************************************/
+volatile enum screen curr_screen = SCR1;
 
 
 /************************************************************************/
@@ -89,7 +102,8 @@ extern void vApplicationMallocFailedHook(void) {
 // Semaforos e filas
 SemaphoreHandle_t xSemaphoreHorario;
 
-QueueHandle_t xPulseQueue;
+
+QueueHandle_t xPulseQueue, xQueueViagem;
 
 // Mutex
 SemaphoreHandle_t xMutex;
@@ -130,6 +144,26 @@ static void event_handler(lv_event_t * e) {
 
 	if(code == LV_EVENT_CLICKED) {
 		LV_LOG_USER("Clicked");
+		
+	}
+	else if(code == LV_EVENT_VALUE_CHANGED) {
+		LV_LOG_USER("Toggled");
+	}
+}
+
+void settings_handler(lv_event_t *e) {
+	lv_event_code_t code = lv_event_get_code(e);
+	
+	if(code == LV_EVENT_CLICKED) {
+		LV_LOG_USER("Clicked");
+		if (curr_screen == SCR1) {
+			lv_scr_load(scr2);
+			curr_screen = SCR2;
+		} else {
+			lv_scr_load(scr1);
+			curr_screen = SCR1;
+		}
+		
 	}
 	else if(code == LV_EVENT_VALUE_CHANGED) {
 		LV_LOG_USER("Toggled");
@@ -154,8 +188,11 @@ static void task_lcd(void *pvParameters) {
 	create_header(scr1, &logo, &MontAltEL20);
 	create_footer(scr1);
 	create_speed_section(scr1, &MontAltEL20);
-    create_viagem_section(scr1, &MontAltEL20);
-	
+	viagem_imgs imgs = {&roda_logo, &play_pause_button, &stop_button};
+    create_viagem_section(scr1, &MontAltEL20, imgs);
+	// Monta tela 2
+	create_header(scr2, &logo, &MontAltEL20);
+	create_footer(scr2);
 	// Carrega na tela.
 	lv_scr_load(scr1);
 
@@ -169,13 +206,17 @@ static void task_lcd(void *pvParameters) {
 }
 
 static void task_rtc(void *pvParameters) {
-	
+// 	xQueueViagem = xQueueCreate(32, sizeof(char));
+// 	if (xQueueViagem == NULL) {
+// 		printf("Erro ao criar os semáforos\n");
+// 	}
 	/** Configura RTC -> Usa o RTC para atualizar o horario todo segundo.**/
 	calendar rtc_initial = {2022, 11, 19, 12, 14, 01, 1};
 	RTC_init(RTC, ID_RTC, rtc_initial, RTC_IER_SECEN);
 	uint32_t current_hour, current_min, current_sec;
 	uint32_t dT;
 	char viagem_rodando = 1;
+	char received_queue;
 	viagem_time v_time = {0, 0, 0};
 	float dist = 0.0;
 	const float raio = (float)(0.508/2.0);
@@ -185,9 +226,10 @@ static void task_rtc(void *pvParameters) {
 	RTT_init(RTT_FREQ, 0, 0);
 	
 	while(1) {
-		if ((xSemaphoreTake(xSemaphoreHorario, 0) == pdTRUE)) {
+		if (xSemaphoreTake(xSemaphoreHorario, 0) == pdTRUE) {
 			rtc_get_time(RTC, &current_hour, &current_min, &current_sec);
 			xSemaphoreTake( xMutex, portMAX_DELAY );
+			// TODO: Ver oq está bugando isso
 			lv_label_set_text_fmt(labelClockHeader, "%02d:%02d:%02d", current_hour, current_min, current_sec);
 			if (viagem_rodando) {
 				v_time.sec++;
@@ -227,6 +269,28 @@ static void task_rtc(void *pvParameters) {
 			}
 			xSemaphoreGive( xMutex );
 		}
+// 		if (xQueueReceive(xQueueViagem, &received_queue, 0)) {
+// 			// p -> Play
+// 			// P -> Pause
+// 			// S -> Stop
+// 			if (received_queue == 'p') {
+// 				viagem_rodando = 1;
+// 			} else if (received_queue == 'P') {
+// 				viagem_rodando = 0;
+// 			} else {
+// 				xSemaphoreTake( xMutex, portMAX_DELAY );
+// 				viagem_rodando = 0;
+// 				v_time.hour = 0;
+// 				v_time.min = 0;
+// 				v_time.sec = 0;
+// 				dist = 0;
+// 				v_m = 0;
+// 				lv_label_set_text_fmt(labelDistValue, "%.01f", dist);
+// 				lv_label_set_text_fmt(labelVelMValue, "%.01f", v_m);
+// 				lv_label_set_text_fmt(labelViagemClock, "%02d:%02d", v_time.hour, v_time.min);
+// 				xSemaphoreGive( xMutex );
+// 			}
+// 		}
 	}
 }
 #include "arm_math.h"

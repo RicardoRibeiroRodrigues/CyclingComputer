@@ -32,24 +32,13 @@ void create_header(lv_obj_t * screen, const lv_img_dsc_t *logo, const lv_font_t 
 	lv_style_set_line_color(&style_line, lv_color_black());
 	lv_style_set_line_rounded(&style_line, true);
 
-	// Um dos maiores misterios da humanidade -> O y = 0 está na metade da tela
 	static lv_point_t line_points[] = { {0, 0}, {240, 0} };
 	lv_obj_t * line1;
 	line1 = lv_line_create(screen);
 	lv_line_set_points(line1, line_points, 2);     /*Set the points*/
 	lv_obj_add_style(line1, &style_line, 0);
 	lv_obj_center(line1);
-}
-
-void settings_handler(lv_event_t *e) {
-	lv_event_code_t code = lv_event_get_code(e);
-	
-	if(code == LV_EVENT_CLICKED) {
-		LV_LOG_USER("Clicked");
-	}
-	else if(code == LV_EVENT_VALUE_CHANGED) {
-		LV_LOG_USER("Toggled");
-	}
+	lv_obj_align(line1, LV_ALIGN_TOP_MID, 0, 32);
 }
 
 void create_footer(lv_obj_t * screen) {
