@@ -2332,6 +2332,9 @@
     <Compile Include="src\play_pause_button.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\quadrado.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\roda_logo.h">
       <SubType>compile</SubType>
     </Compile>

@@ -33,6 +33,14 @@ static lv_obj_t *labelCalTitle;
 // wheel_animation
 static lv_anim_t wheel_animation;
 static lv_obj_t *img_wheel;
+// Aceleration animation
+static lv_obj_t *unidade_1;
+static lv_obj_t *unidade_2;
+static lv_obj_t *unidade_3;
+#define START_BLOCK 40
+#define HEIGHT_SQUARE 20
+#define SPACE_BETWEEN HEIGHT_SQUARE + 6
+
 
 static volatile int is_viagem_on;
 extern QueueHandle_t xQueueViagem;
@@ -44,8 +52,9 @@ typedef struct{
 	const lv_img_dsc_t *stop_button;
 } viagem_imgs;
 
-void create_speed_section(lv_obj_t * screen, const lv_font_t *MontAltEL58);
+void create_speed_section(lv_obj_t * screen, const lv_font_t *MontAltEL20, const lv_img_dsc_t *img_unidade);
 void create_viagem_section(lv_obj_t *screen, const lv_font_t *MontAltEL20, viagem_imgs imgs);
+void write_acceleration(float acceleration);
 
 
 #endif /* SCREEN_1_PARTS_H_ */

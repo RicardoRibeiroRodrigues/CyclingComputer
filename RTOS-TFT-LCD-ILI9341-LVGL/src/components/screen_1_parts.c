@@ -9,24 +9,75 @@
 LV_FONT_DECLARE(MontAltEL80);
 
 
-void create_speed_section(lv_obj_t * screen, const lv_font_t *MontAltEL20) {
+
+void write_acceleration(float acceleration) {
+	if ((acceleration < 0.1) && (acceleration > -0.1)) {
+		lv_obj_add_flag(unidade_1, LV_OBJ_FLAG_HIDDEN);
+		lv_obj_add_flag(unidade_3, LV_OBJ_FLAG_HIDDEN);
+	} else if (acceleration > 0) {
+		lv_obj_add_flag(unidade_3, LV_OBJ_FLAG_HIDDEN);
+		lv_obj_clear_flag(unidade_1, LV_OBJ_FLAG_HIDDEN);
+	} else {
+		lv_obj_clear_flag(unidade_3, LV_OBJ_FLAG_HIDDEN);
+		lv_obj_add_flag(unidade_1, LV_OBJ_FLAG_HIDDEN);
+	}
+}
+
+void create_speed_section(lv_obj_t * screen, const lv_font_t *MontAltEL20, const lv_img_dsc_t *img_unidade) {
 	static lv_style_t textStyle;
 	lv_style_init(&textStyle);
 	lv_style_set_border_width(&textStyle, 0);
 	lv_style_set_text_color(&textStyle, lv_color_black());
 	
 	labelSpeedValue = lv_label_create(screen);
-	lv_obj_align(labelSpeedValue, LV_ALIGN_LEFT_MID, 26, -85);
+	lv_obj_align(labelSpeedValue, LV_ALIGN_LEFT_MID, 15, -85);
 	lv_obj_add_style(labelSpeedValue, &textStyle, 0);
 	lv_obj_set_style_text_font(labelSpeedValue, &MontAltEL80, LV_STATE_DEFAULT);
-	lv_label_set_text_fmt(labelSpeedValue, "%d", 10);
+	lv_label_set_text_fmt(labelSpeedValue, "%.01f", 0.0);
 	
 	
 	labelSpeedUnit = lv_label_create(screen);
 	lv_obj_add_style(labelSpeedUnit, &textStyle, 0);
-	lv_obj_align_to(labelSpeedUnit, labelSpeedValue, LV_ALIGN_OUT_RIGHT_MID, 20, -6);
+	lv_obj_align_to(labelSpeedUnit, labelSpeedValue, LV_ALIGN_OUT_RIGHT_MID, -2, -6);
 	lv_obj_set_style_text_font(labelSpeedUnit, MontAltEL20, LV_STATE_DEFAULT);
 	lv_label_set_text(labelSpeedUnit, "km/h");
+	
+	// Parte da aceleracao
+	
+	static lv_style_t style_inv;
+	lv_style_init(&style_inv);
+	lv_style_set_bg_opa(&style_inv, LV_OPA_TRANSP);
+	lv_style_set_border_opa(&style_inv, LV_OPA_TRANSP);
+	
+	unidade_1 = lv_img_create(screen);
+	lv_img_set_src(unidade_1, img_unidade);
+	lv_obj_add_flag(unidade_1, LV_OBJ_FLAG_HIDDEN);
+	lv_obj_align(unidade_1, LV_ALIGN_TOP_RIGHT, -10, START_BLOCK);
+	
+	unidade_2 = lv_img_create(screen);
+	lv_img_set_src(unidade_2, img_unidade);
+	lv_obj_align(unidade_2, LV_ALIGN_TOP_RIGHT, -10, START_BLOCK + SPACE_BETWEEN);
+	
+	unidade_3 = lv_img_create(screen);
+	lv_img_set_src(unidade_3, img_unidade);
+	lv_obj_add_flag(unidade_3, LV_OBJ_FLAG_HIDDEN);
+	lv_obj_align_to(unidade_3, unidade_2, LV_ALIGN_OUT_BOTTOM_MID, 0, HEIGHT_SQUARE / 4);
+	
+	// Linha no meio do bloco central
+	static lv_style_t style_line;
+	lv_style_init(&style_line);
+	lv_style_set_line_width(&style_line, 2);
+	lv_style_set_bg_color(&style_line, lv_color_white());
+	lv_style_set_line_color(&style_line, lv_color_black());
+	lv_style_set_line_rounded(&style_line, true);
+
+	static lv_point_t line_points[] = { {200, 0}, {230, 0} };
+	lv_obj_t * line1;
+	line1 = lv_line_create(screen);
+	lv_line_set_points(line1, line_points, 2);     /*Set the points*/
+	lv_obj_add_style(line1, &style_line, 0);
+	lv_obj_center(line1);
+	lv_obj_align(line1, LV_ALIGN_TOP_MID, 1, START_BLOCK + SPACE_BETWEEN + (HEIGHT_SQUARE / 2));
 }
 
 
@@ -41,7 +92,7 @@ void create_dist_div(lv_obj_t *screen, const lv_font_t *MontAltEL20, lv_style_t 
 	lv_obj_align_to(labelDistValue,labelDistTitle,  LV_ALIGN_OUT_BOTTOM_MID, -25, -2);
 	lv_obj_add_style(labelDistValue, textStyle, 0);
 	lv_obj_set_style_text_font(labelDistValue, MontAltEL20, LV_STATE_DEFAULT);
-	lv_label_set_text_fmt(labelDistValue, "%d", 10);
+	lv_label_set_text_fmt(labelDistValue, "%.01f", 0.0);
 	
 	labelDistUnit = lv_label_create(screen);
 	lv_obj_align_to(labelDistUnit, labelDistValue, LV_ALIGN_OUT_RIGHT_MID, 12, -2);
@@ -61,7 +112,7 @@ void create_velm_div(lv_obj_t *screen, const lv_font_t *MontAltEL20, lv_style_t 
 	lv_obj_align_to(labelVelMValue, labelVelMTitle,  LV_ALIGN_OUT_BOTTOM_MID, -20, 0);
 	lv_obj_add_style(labelVelMValue, textStyle, 0);
 	lv_obj_set_style_text_font(labelVelMValue, MontAltEL20, LV_STATE_DEFAULT);
-	lv_label_set_text_fmt(labelVelMValue, "%.01f", 5.7);
+	lv_label_set_text_fmt(labelVelMValue, "%.01f", 0.0);
 	
 	labelVelMUnit = lv_label_create(screen);
 	lv_obj_align_to(labelVelMUnit, labelVelMValue, LV_ALIGN_OUT_RIGHT_MID, 8, -5);
@@ -82,7 +133,7 @@ void create_cal_div(lv_obj_t *screen, const lv_font_t *MontAltEL20, lv_style_t *
 	lv_obj_align_to(labelCalValue, labelCalTitle,  LV_ALIGN_OUT_BOTTOM_MID, -20, -1);
 	lv_obj_add_style(labelCalValue, textStyle, 0);
 	lv_obj_set_style_text_font(labelCalValue, MontAltEL20, LV_STATE_DEFAULT);
-	lv_label_set_text_fmt(labelCalValue, "%d", 560);
+	lv_label_set_text_fmt(labelCalValue, "%d", 0);
 	
 	labelCalUnit = lv_label_create(screen);
 	lv_obj_align_to(labelCalUnit, labelCalValue, LV_ALIGN_OUT_RIGHT_MID, 8, -5);
@@ -123,13 +174,13 @@ static void play_pause_handler(lv_event_t * e) {
 			handle_logo_animation(0);
 			is_viagem_on = 0;
 			char sent_char = 'P';
-			// xQueueSend(xQueueViagem, &sent_char, 0);
+			xQueueSend(xQueueViagem, &sent_char, 0);
 		} else {
 			// Play
 			handle_logo_animation(1);
 			is_viagem_on = 1;
 			char sent_char = 'p';
-			// xQueueSend(xQueueViagem, &sent_char, 0);
+			xQueueSend(xQueueViagem, &sent_char, 0);
 		}
 		LV_LOG_USER("Clicked");
 	}
@@ -146,7 +197,7 @@ static void stop_handler(lv_event_t * e) {
 		handle_logo_animation(0);
 		is_viagem_on = 0;
 		char sent_char = 'S';
-		// xQueueSend(xQueueViagem, &sent_char, 0);
+		xQueueSend(xQueueViagem, &sent_char, 0);
 	}
 	else if(code == LV_EVENT_VALUE_CHANGED) {
 		LV_LOG_USER("Toggled");
@@ -166,22 +217,23 @@ void create_viagem_section(lv_obj_t *screen, const lv_font_t *MontAltEL20, viage
 	lv_obj_set_style_text_font(labelViagemText, MontAltEL20, LV_STATE_DEFAULT);
 	lv_label_set_text(labelViagemText, "Viagem");
 	
-	// Tempo da viagem e indicação visual que está rodando
+	// --------------------------- Tempo da viagem e indicação visual que está rodando ---------------------------
 	labelViagemClock = lv_label_create(screen);
 	lv_obj_align(labelViagemClock, LV_ALIGN_RIGHT_MID, -10, -32);
 	lv_obj_add_style(labelViagemClock, &textStyle, 0);
 	lv_obj_set_style_text_font(labelViagemClock, MontAltEL20, LV_STATE_DEFAULT);
-	lv_label_set_text_fmt(labelViagemClock, "%d:%d", 0, 0);
+	lv_label_set_text_fmt(labelViagemClock, "%02d:%02d", 0, 0);
 	
 	// Roda do logo.
 	img_wheel = lv_img_create(screen);
 	lv_img_set_src(img_wheel, imgs.roda_logo);
-	lv_obj_align_to(img_wheel, labelViagemClock, LV_ALIGN_OUT_LEFT_MID, -30, 0);
+	lv_obj_align_to(img_wheel, labelViagemClock, LV_ALIGN_OUT_LEFT_MID, -20, 0);
 	
-	// Botoes do lado
+	// --------------------------- Botoes do lado ---------------------------
 	static lv_style_t style_def;
-	lv_style_init(&style_def); /*Darken the button when pressed and make it wider*/
+	lv_style_init(&style_def);
 	lv_style_set_bg_color(&style_def, lv_color_white());
+	lv_style_set_text_color(&style_def, lv_color_white());
 	static lv_style_t style_pr;
 	lv_style_init(&style_pr);
 	lv_style_set_img_recolor_opa(&style_pr, LV_OPA_30);
@@ -192,20 +244,22 @@ void create_viagem_section(lv_obj_t *screen, const lv_font_t *MontAltEL20, viage
 	lv_obj_add_style(playPauseButton, &style_def, 0);
 	lv_obj_add_style(playPauseButton, &style_pr, LV_STATE_PRESSED);
 	lv_obj_add_event_cb(playPauseButton, play_pause_handler, LV_EVENT_ALL, NULL);
-	lv_obj_align(playPauseButton, LV_ALIGN_LEFT_MID, 10, 50);
+	lv_obj_align(playPauseButton, LV_ALIGN_LEFT_MID, 15, 50);
 	
 	lv_obj_t *stopButton = lv_imgbtn_create(screen);
 	lv_imgbtn_set_src(stopButton, LV_IMGBTN_STATE_RELEASED, imgs.stop_button, NULL, NULL);
 	lv_obj_add_style(stopButton, &style_def, 0);
 	lv_obj_add_style(stopButton, &style_pr, LV_STATE_PRESSED);
 	lv_obj_add_event_cb(stopButton, stop_handler, LV_EVENT_ALL, NULL);
-	lv_obj_align_to(stopButton, playPauseButton, LV_ALIGN_OUT_BOTTOM_MID, 5, -60);
+	lv_obj_align_to(stopButton, playPauseButton, LV_ALIGN_OUT_BOTTOM_MID, 0, -60);
 	
+	// --------------------------- Criacao das divs ---------------------------
 	create_dist_div(screen, MontAltEL20, &textStyle);
 	create_velm_div(screen, MontAltEL20, &textStyle);
 	create_cal_div(screen, MontAltEL20, &textStyle);
 	
-	 static lv_style_t style_line;
+	// --------------------------- Linhas de divisao ---------------------------
+	static lv_style_t style_line;
 	lv_style_init(&style_line);
 	lv_style_set_line_width(&style_line, 2);
 	lv_style_set_bg_color(&style_line, lv_color_white());
