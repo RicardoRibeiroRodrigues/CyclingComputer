@@ -14,6 +14,7 @@
 #include "play_pause_button.h"
 #include "stop_button.h"
 #include "components/screen_1_parts.h"
+#include "components/screen_2_parts.h"
 #include "hardware.h"
 
 LV_FONT_DECLARE(MontAltEL20);
@@ -195,7 +196,13 @@ static void task_lcd(void *pvParameters) {
 	viagem_imgs imgs = {&roda_logo, &play_pause_button, &stop_button};
     create_viagem_section(scr1, &MontAltEL20, imgs);
 	// Monta tela 2
-	//create_header(scr2, &logo, &MontAltEL20);
+	lv_obj_set_style_bg_color(scr2, lv_color_white(), LV_PART_MAIN );
+	create_header(scr2, &logo, &MontAltEL20);
+	create_footer(scr2);
+	create_peso_section(scr2, &MontAltEL20, &quadrado);
+	create_aro_section(scr2, &MontAltEL20, &roda_logo);
+	horario_imgs img = {&roda_logo, &play_pause_button, &stop_button};
+	create_horario_section(scr2, &MontAltEL20, img);
 	create_footer(scr2);
 	// Carrega na tela.
 	lv_scr_load(scr1);

@@ -628,6 +628,8 @@ src\components\header_footer.c
 
 src\components\screen_1_parts.c
 
+src\components\screen_2_parts.c
+
 src\hardware.c
 
 src\MontAltEL20.c
