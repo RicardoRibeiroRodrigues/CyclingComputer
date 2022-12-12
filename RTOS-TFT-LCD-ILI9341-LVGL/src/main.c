@@ -392,6 +392,7 @@ static void task_infos(void *pvParameters) {
 				lv_label_set_text_fmt(labelDistValue, "%.01f", dist_km);
 				lv_label_set_text_fmt(labelVelMValue, "%.01f", vm_km_per_h);
 				lv_label_set_text_fmt(labelViagemClock, "%02d:%02d", v_time.hour, v_time.min);
+				lv_label_set_text_fmt(labelCalValue, "%.01f", 0.0);
 				xSemaphoreGive( xMutex );
 			}
 		}
