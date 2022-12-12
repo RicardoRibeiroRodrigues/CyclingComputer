@@ -11,13 +11,18 @@ LV_FONT_DECLARE(MontAltEL80);
 
 
 void write_acceleration(float acceleration) {
-	if ((acceleration < 0.1) && (acceleration > -0.1)) {
+	// Faixa de mov. uniforme -> Acerelacao em modulo menor que 0.01 km/h*s (equivalente a 36 km/h^2).
+	// Abaixo disso desse módulo, podemos considerar uniforme, para evitar ruidos.
+	if ((acceleration < 36) && (acceleration > -36)) {
+		// Dentro da faixa de movimento uniforme
 		lv_obj_add_flag(unidade_1, LV_OBJ_FLAG_HIDDEN);
 		lv_obj_add_flag(unidade_3, LV_OBJ_FLAG_HIDDEN);
-	} else if (acceleration > 0) {
+	} else if (acceleration >= 36) {
+		// Acelerando
 		lv_obj_add_flag(unidade_3, LV_OBJ_FLAG_HIDDEN);
 		lv_obj_clear_flag(unidade_1, LV_OBJ_FLAG_HIDDEN);
 	} else {
+		// Desacelerando
 		lv_obj_clear_flag(unidade_3, LV_OBJ_FLAG_HIDDEN);
 		lv_obj_add_flag(unidade_1, LV_OBJ_FLAG_HIDDEN);
 	}
@@ -83,13 +88,13 @@ void create_speed_section(lv_obj_t * screen, const lv_font_t *MontAltEL20, const
 
 void create_dist_div(lv_obj_t *screen, const lv_font_t *MontAltEL20, lv_style_t *textStyle) {
 	labelDistTitle = lv_label_create(screen);
-	lv_obj_align(labelDistTitle, LV_ALIGN_RIGHT_MID, -35, 0);
+	lv_obj_align(labelDistTitle, LV_ALIGN_RIGHT_MID, -72, 0);
 	lv_obj_add_style(labelDistTitle, textStyle, 0);
 	lv_obj_set_style_text_font(labelDistTitle, MontAltEL20, LV_STATE_DEFAULT);
-	lv_label_set_text(labelDistTitle, "Distancia");
+	lv_label_set_text(labelDistTitle, "Dist.");
 	
 	labelDistValue = lv_label_create(screen);
-	lv_obj_align_to(labelDistValue,labelDistTitle,  LV_ALIGN_OUT_BOTTOM_MID, -25, -2);
+	lv_obj_align_to(labelDistValue,labelDistTitle,  LV_ALIGN_OUT_BOTTOM_MID, 5, -2);
 	lv_obj_add_style(labelDistValue, textStyle, 0);
 	lv_obj_set_style_text_font(labelDistValue, MontAltEL20, LV_STATE_DEFAULT);
 	lv_label_set_text_fmt(labelDistValue, "%.01f", 0.0);
@@ -106,7 +111,7 @@ void create_velm_div(lv_obj_t *screen, const lv_font_t *MontAltEL20, lv_style_t 
 	lv_obj_align(labelVelMTitle, LV_ALIGN_RIGHT_MID, -28, 40);
 	lv_obj_add_style(labelVelMTitle, textStyle, 0);
 	lv_obj_set_style_text_font(labelVelMTitle, MontAltEL20, LV_STATE_DEFAULT);
-	lv_label_set_text(labelVelMTitle, "Vel. média");
+	lv_label_set_text(labelVelMTitle, "Vel. med");
 	
 	labelVelMValue = lv_label_create(screen);
 	lv_obj_align_to(labelVelMValue, labelVelMTitle,  LV_ALIGN_OUT_BOTTOM_MID, -20, 0);
@@ -124,16 +129,16 @@ void create_velm_div(lv_obj_t *screen, const lv_font_t *MontAltEL20, lv_style_t 
 
 void create_cal_div(lv_obj_t *screen, const lv_font_t *MontAltEL20, lv_style_t *textStyle) {
 	labelCalTitle = lv_label_create(screen);
-	lv_obj_align(labelCalTitle, LV_ALIGN_RIGHT_MID, -35, 88);
+	lv_obj_align(labelCalTitle, LV_ALIGN_RIGHT_MID, -70, 85);
 	lv_obj_add_style(labelCalTitle, textStyle, 0);
 	lv_obj_set_style_text_font(labelCalTitle, MontAltEL20, LV_STATE_DEFAULT);
-	lv_label_set_text(labelCalTitle, "Calorias");
+	lv_label_set_text(labelCalTitle, "Cals.");
 	
 	labelCalValue = lv_label_create(screen);
-	lv_obj_align_to(labelCalValue, labelCalTitle,  LV_ALIGN_OUT_BOTTOM_MID, -20, -1);
+	lv_obj_align_to(labelCalValue, labelCalTitle,  LV_ALIGN_OUT_BOTTOM_MID, 5, -1);
 	lv_obj_add_style(labelCalValue, textStyle, 0);
 	lv_obj_set_style_text_font(labelCalValue, MontAltEL20, LV_STATE_DEFAULT);
-	lv_label_set_text_fmt(labelCalValue, "%d", 0);
+	lv_label_set_text_fmt(labelCalValue, "%.01f", 0.0);
 	
 	labelCalUnit = lv_label_create(screen);
 	lv_obj_align_to(labelCalUnit, labelCalValue, LV_ALIGN_OUT_RIGHT_MID, 8, -5);
@@ -227,7 +232,7 @@ void create_viagem_section(lv_obj_t *screen, const lv_font_t *MontAltEL20, viage
 	// Roda do logo.
 	img_wheel = lv_img_create(screen);
 	lv_img_set_src(img_wheel, imgs.roda_logo);
-	lv_obj_align_to(img_wheel, labelViagemClock, LV_ALIGN_OUT_LEFT_MID, -20, 0);
+	lv_obj_align_to(img_wheel, labelViagemClock, LV_ALIGN_OUT_LEFT_MID, -20, 4);
 	
 	// --------------------------- Botoes do lado ---------------------------
 	static lv_style_t style_def;

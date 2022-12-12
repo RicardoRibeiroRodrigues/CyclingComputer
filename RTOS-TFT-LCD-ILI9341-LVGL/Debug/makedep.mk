@@ -6,6 +6,8 @@ src\ASF\sam\drivers\rtc\rtc.c
 
 src\ASF\sam\drivers\rtt\rtt.c
 
+src\ASF\sam\drivers\tc\tc.c
+
 src\ASF\thirdparty\lvgl8\examples\anim\lv_example_anim_1.c
 
 src\ASF\thirdparty\lvgl8\examples\anim\lv_example_anim_2.c
@@ -628,11 +630,11 @@ src\components\header_footer.c
 
 src\components\screen_1_parts.c
 
+src\components\screen_2_parts.c
+
 src\hardware.c
 
 src\MontAltEL20.c
-
-src\MontAltEL58.c
 
 src\MontAltEL80.c
 
