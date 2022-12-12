@@ -7,18 +7,18 @@
 #include "header_footer.h"
 
 
-void create_header(lv_obj_t * screen, const lv_img_dsc_t *logo, const lv_font_t *MontAltEL58) {
-	static lv_style_t sevenSegStyle;
-	lv_style_init(&sevenSegStyle);
-	lv_style_set_border_width(&sevenSegStyle, 0);
-	lv_style_set_text_color(&sevenSegStyle, lv_color_black());
+void create_header(lv_obj_t *screen, const lv_img_dsc_t *logo, const lv_font_t *MontAltEL20, lv_obj_t **labelClockHeader) {
+	static lv_style_t clockStyle;
+	lv_style_init(&clockStyle);
+	lv_style_set_border_width(&clockStyle, 0);
+	lv_style_set_text_color(&clockStyle, lv_color_black());
 	// Label clock
-	labelClockHeader = lv_label_create(screen);
-	lv_obj_align(labelClockHeader, LV_ALIGN_TOP_RIGHT, -5, 5);
-	lv_obj_add_style(labelClockHeader, &sevenSegStyle, 0);
+	*labelClockHeader = lv_label_create(screen);
+	lv_obj_align(*labelClockHeader, LV_ALIGN_TOP_RIGHT, -5, 5);
+	lv_obj_add_style(*labelClockHeader, &clockStyle, 0);
 	// 0123456789:., PesokgHrárim/hclVatu
-	lv_obj_set_style_text_font(labelClockHeader, MontAltEL58, LV_STATE_DEFAULT);
-	lv_label_set_text_fmt(labelClockHeader, "%02d:%02d:02d", 14, 2, 10);
+	lv_obj_set_style_text_font(*labelClockHeader, MontAltEL20, LV_STATE_DEFAULT);
+	lv_label_set_text_fmt(*labelClockHeader, "%02d:%02d:02d", 14, 2, 10);
 	// ------------------------ Logo ------------------------
 	lv_obj_t * img = lv_img_create(screen);
 	lv_img_set_src(img, logo);
@@ -32,24 +32,13 @@ void create_header(lv_obj_t * screen, const lv_img_dsc_t *logo, const lv_font_t 
 	lv_style_set_line_color(&style_line, lv_color_black());
 	lv_style_set_line_rounded(&style_line, true);
 
-	// Um dos maiores misterios da humanidade -> O y = 0 está na metade da tela
 	static lv_point_t line_points[] = { {0, 0}, {240, 0} };
 	lv_obj_t * line1;
 	line1 = lv_line_create(screen);
 	lv_line_set_points(line1, line_points, 2);     /*Set the points*/
 	lv_obj_add_style(line1, &style_line, 0);
 	lv_obj_center(line1);
-}
-
-void settings_handler(lv_event_t *e) {
-	lv_event_code_t code = lv_event_get_code(e);
-	
-	if(code == LV_EVENT_CLICKED) {
-		LV_LOG_USER("Clicked");
-	}
-	else if(code == LV_EVENT_VALUE_CHANGED) {
-		LV_LOG_USER("Toggled");
-	}
+	lv_obj_align(line1, LV_ALIGN_TOP_MID, 0, 32);
 }
 
 void create_footer(lv_obj_t * screen) {
