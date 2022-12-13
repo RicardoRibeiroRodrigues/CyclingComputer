@@ -137,3 +137,17 @@ Para a interface do ciclocomputador, optamos por apostar no preto e branco, que 
 
 <br>
 
+## Resultado final
+
+
+<div style="display: flex; flex-direction: row; justify-content: space-between;">
+
+<img src="imgs/tela1_final.jpg" alt="Tela 1 da interface" style="height: 650px;"/>
+<img src="imgs/tela2_final.jpg" alt="Tela 2 da interface" style="height: 650px;"/>
+
+</div>
+
+### Vídeo demonstrando a interface
+
+[![Thumbnail do video](http://img.youtube.com/vi/rPx16Y-L4dY/0.jpg)](https://www.youtube.com/watch?v=rPx16Y-L4dY "Video demonstrado a interface")
+
