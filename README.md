@@ -36,6 +36,9 @@ Nome da marca:
 - Para a escolha do aro, será utilizado o **Roller (lv_roller)**.
 - Para o input do peso, será utilizado o **Slider (lv_slider)**.
 
+### Icones utilizados
+- <a href="https://www.flaticon.com/free-icons/pause" title="pause icons">Pause icons created by bqlqn - Flaticon</a>
+
 
 #### **Interface executada no LCD**
 
