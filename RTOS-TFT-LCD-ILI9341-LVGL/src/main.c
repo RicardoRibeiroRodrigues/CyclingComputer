@@ -13,9 +13,10 @@
 #include "roda_logo.h"
 #include "quadrado.h"
 #include "play_pause_button.h"
-#include "stop_button.h"
 #include "stop_button_.h"
 #include "roda_scr2.h"
+#include "clock_icon.h"
+#include "weight_icon.h"
 // Components
 #include "components/screen_1_parts.h"
 #include "components/screen_2_parts.h"
@@ -198,18 +199,17 @@ static void task_lcd(void *pvParameters) {
 	// Monta tela 1
 	lv_obj_set_style_bg_color(scr1, lv_color_white(), LV_PART_MAIN );
 	create_header(scr1, &logo, &MontAltEL20, &labelClock1);
-	create_footer(scr1);
+	create_footer(scr1, 1);
 	create_speed_section(scr1, &MontAltEL20, &quadrado);
 	viagem_imgs imgs = {&roda_logo, &play_pause_button, &stop_button_};
     create_viagem_section(scr1, &MontAltEL20, imgs);
 	// Monta tela 2
 	lv_obj_set_style_bg_color(scr2, lv_color_white(), LV_PART_MAIN );
 	create_header(scr2, &logo, &MontAltEL20, &labelClock2);
-	create_peso_section(scr2, &MontAltEL20, &quadrado);
+	create_peso_section(scr2, &MontAltEL20, &weight_icon);
 	create_aro_section(scr2, &MontAltEL20, &roda_scr2);
-	horario_imgs img = {NULL, &play_pause_button, &stop_button};
-	create_horario_section(scr2, &MontAltEL20, img);
-	create_footer(scr2);
+	create_horario_section(scr2, &MontAltEL20, &clock_icon);
+	create_footer(scr2, 2);
 	
 	// Carrega na tela.
 	lv_scr_load(scr1);
@@ -341,25 +341,20 @@ static void task_infos(void *pvParameters) {
 			xSemaphoreGive( xMutex);
 		}
 		if (xQueueReceive(xPulseQueue, &dt_pulsos, 0)) {
-			// printf("dT: %d\n", dt_pulsos);
 			
 			if (viagem_rodando) {
 				dist_km += ((double)(2.0 * PI * raio_m) / 1000.0);
 				t_in_hour = v_time.hour + ((double)v_time.min/60.0) + ((double)v_time.sec/3600.0);
 				vm_km_per_h = dist_km / (t_in_hour);
-				// printf("dist: %f, vm: %f, \n", dist_km, vm_km_per_h);
 			}
 			// Calculo da velocidade instantanea 
 			double dt_secs = ((double) dt_pulsos / RTT_FREQ);
-			// printf("dt_secs = %f\n", dt_secs);
 			double f_hz = ((double) 1.0 / dt_secs);
 			double w_rads_per_sec = ((double)2 * PI * f_hz);
 			double v_km_per_hour =  ((double)w_rads_per_sec * raio_m) * 3.6;
 			// Calculo da aceleracao
 			aceleration_km_per_hour_sq = (v_km_per_hour - last_v_km_per_hour) / (dt_secs / 3600.0);
 			last_v_km_per_hour = v_km_per_hour;
-			// printf("V = %f\n", v_km_per_hour);
-			// printf("a = %f\n", aceleration_km_per_hour_sq);
 			xSemaphoreTake( xMutex, portMAX_DELAY );
 			if (v_km_per_hour < 10) {
 				lv_label_set_text_fmt(labelSpeedValue, "%.01f", v_km_per_hour);
@@ -404,7 +399,7 @@ static void task_infos(void *pvParameters) {
 				pulse_n++;
 				pulses_since_last_checked = 0;
 				if (pulse_n > 1) {
-					int ibm = pulses_since_last * 2;
+					int ibm = pulses_since_last * TC_TIME_BETWEEN_PULSES;
 					int bpm = 60000 / ibm;
 					if ((bpm > 40) && (bpm < 240)) {
 						bpm_vec[(bpm_i++) % 10] = bpm;
@@ -417,7 +412,11 @@ static void task_infos(void *pvParameters) {
 						}
 						float burnt_cals = calc_burnt_calories(bpm_avg_val, weight_kg, time_viagem_minutes);
 						xSemaphoreTake( xMutex, portMAX_DELAY );
-						lv_label_set_text_fmt(labelCalValue, "%.01f", burnt_cals);
+						if (burnt_cals >= 100.0) {
+							lv_label_set_text_fmt(labelCalValue, "%d", ((int)burnt_cals));
+						} else {
+							lv_label_set_text_fmt(labelCalValue, "%.01f", burnt_cals);
+						}
 						xSemaphoreGive( xMutex );
 					}
 					pulse_n = 0;
@@ -534,8 +533,8 @@ void RTC_init(Rtc *rtc, uint32_t id_rtc, calendar t, uint32_t irq_type) {
 }
 
 float calc_burnt_calories(int avg_bpm, int weight, double time_mins){
-	double a = (-20.4022 + ((double) 0.4472 * avg_bpm) - ((double) -0.1263 * weight) + 2.22);
-	return ((float)(a / 4.184) * time_mins);
+	double a = (-20.4022 + ((double) 0.44 * avg_bpm) - ((double) -0.1263 * weight) + 2.22);
+	return ((float)(a / 4.58) * time_mins);
 }
 
 /************************************************************************/

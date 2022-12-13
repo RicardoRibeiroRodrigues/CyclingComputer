@@ -22,6 +22,7 @@
 
 #define RTT_FREQ 5000
 #define TC_FREQ 500
+#define TC_TIME_BETWEEN_PULSES 1000 / TC_FREQ
 
 extern QueueHandle_t xPulseQueue;
 extern QueueHandle_t xQueueADC;

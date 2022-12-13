@@ -415,9 +415,9 @@ src/main.d src/main.o: ../src/main.c ../src/asf.h \
  ../src/ASF/thirdparty/lvgl8/src/extra/libs/rlottie/../../../lvgl.h \
  ../src/touch/touch.h ../src/components/header_footer.h ../src/logo.h \
  ../src/roda_logo.h ../src/quadrado.h ../src/play_pause_button.h \
- ../src/stop_button.h ../src/stop_button_.h ../src/roda_scr2.h \
- ../src/components/screen_1_parts.h ../src/components/screen_2_parts.h \
- ../src/hardware.h ../src/asf.h \
+ ../src/stop_button_.h ../src/roda_scr2.h ../src/clock_icon.h \
+ ../src/weight_icon.h ../src/components/screen_1_parts.h \
+ ../src/components/screen_2_parts.h ../src/hardware.h ../src/asf.h \
  ../src/ASF/thirdparty/CMSIS/Include/arm_math.h \
  ../src/ASF/thirdparty/CMSIS/Include/core_cm7.h \
  d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h
@@ -1284,11 +1284,13 @@ d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/play_pause_button.h:
 
-../src/stop_button.h:
-
 ../src/stop_button_.h:
 
 ../src/roda_scr2.h:
+
+../src/clock_icon.h:
+
+../src/weight_icon.h:
 
 ../src/components/screen_1_parts.h:
 

@@ -17,6 +17,8 @@ static void aro_handler(lv_event_t * e)
 		if (strlen(buf) != 0) {
 			float aro = atof(buf);
 			xQueueSend(xQueueAro, &aro, 0);
+			uint16_t valor_zoom = 256 * (aro / 20.0);
+			lv_img_set_zoom(img_wheel, valor_zoom);
 		}
     }
 }
@@ -64,7 +66,7 @@ void create_aro_section(lv_obj_t * screen, const lv_font_t *MontAltEL20, lv_img_
 	// Roda do logo.
 	img_wheel = lv_img_create(screen);
 	lv_img_set_src(img_wheel, img_rodalogo);
-	lv_obj_align(img_wheel, LV_ALIGN_TOP_LEFT, 30, 50);
+	lv_obj_align(img_wheel, LV_ALIGN_TOP_LEFT, 28, 60);
 	
 }
 
@@ -97,14 +99,14 @@ static void minus_peso_event_cb(lv_event_t * e)
 
 }
 
-void create_peso_section(lv_obj_t * screen, const lv_font_t *MontAltEL20, const lv_img_dsc_t *img_peso) {
+void create_peso_section(lv_obj_t * screen, const lv_font_t *MontAltEL20, const lv_img_dsc_t *img_peso_) {
 	static lv_style_t textStyle;
 	lv_style_init(&textStyle);
 	lv_style_set_border_width(&textStyle, 0);
 	lv_style_set_text_color(&textStyle, lv_color_black());
 	
 	labelPesoValue = lv_label_create(screen);
-	lv_obj_align(labelPesoValue, LV_ALIGN_TOP_RIGHT, -55, 60);
+	lv_obj_align(labelPesoValue, LV_ALIGN_TOP_RIGHT, -55, 70);
 	lv_obj_add_style(labelPesoValue, &textStyle, 0);
 	lv_obj_set_style_text_font(labelPesoValue, MontAltEL20, LV_STATE_DEFAULT);
 	lv_label_set_text_fmt(labelPesoValue, "%d", peso_kg);
@@ -144,6 +146,11 @@ void create_peso_section(lv_obj_t * screen, const lv_font_t *MontAltEL20, const 
 	lv_obj_t * label2 = lv_label_create(plus);          /*Add a label to the button*/
 	lv_label_set_text(label2, "+");                     /*Set the labels text*/
 	lv_obj_center(label2);
+	
+	// Icone do peso
+	img_peso = lv_img_create(screen);
+	lv_img_set_src(img_peso, img_peso_);
+	lv_obj_align_to(img_peso, labelPesoText, LV_ALIGN_OUT_RIGHT_MID, 40, 0);
 }
 
 static void plus_h_event_cb(lv_event_t * e)
@@ -234,18 +241,22 @@ static void plus_min_event_cb(lv_event_t * e)
 }
 
 
-void create_horario_section(lv_obj_t *screen, const lv_font_t *MontAltEL20, horario_imgs imgs) {
+void create_horario_section(lv_obj_t *screen, const lv_font_t *MontAltEL20, const lv_img_dsc_t *img_horario_) {
 	static lv_style_t textStyle;
 	lv_style_init(&textStyle);
 	lv_style_set_border_width(&textStyle, 0);
 	lv_style_set_text_color(&textStyle, lv_color_black());
-	
 	
 	labelHorarioText = lv_label_create(screen);
 	lv_obj_align(labelHorarioText, LV_ALIGN_RIGHT_MID, -40, -30);
 	lv_obj_add_style(labelHorarioText, &textStyle, 0);
 	lv_obj_set_style_text_font(labelHorarioText, MontAltEL20, LV_STATE_DEFAULT);
 	lv_label_set_text(labelHorarioText, "Horario");
+	
+	// Icone de horario
+	img_horario = lv_img_create(screen);
+	lv_img_set_src(img_horario, img_horario_);
+	lv_obj_align_to(img_horario, labelHorarioText, LV_ALIGN_OUT_RIGHT_MID, 15, 0);
 	
 	labelHoraValue = lv_label_create(screen);
 	lv_obj_align_to(labelHoraValue, labelHorarioText,  LV_ALIGN_OUT_BOTTOM_MID, 5, 20);

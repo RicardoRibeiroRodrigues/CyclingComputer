@@ -41,7 +41,7 @@ void create_header(lv_obj_t *screen, const lv_img_dsc_t *logo, const lv_font_t *
 	lv_obj_align(line1, LV_ALIGN_TOP_MID, 0, 32);
 }
 
-void create_footer(lv_obj_t * screen) {
+void create_footer(lv_obj_t * screen, int screen_number) {
 	
 	// Linha divisora
 	static lv_style_t style_line;
@@ -58,7 +58,7 @@ void create_footer(lv_obj_t * screen) {
 	lv_obj_center(line1);
 	
 	
-	// -------------------- Engrenagem --------------------
+	// -------------------- Engrenagem/Casa --------------------
 	static lv_style_t style;
 	lv_style_init(&style);
 	lv_style_set_bg_color(&style, lv_color_white());
@@ -74,6 +74,10 @@ void create_footer(lv_obj_t * screen) {
 	lv_obj_add_style(settings, &style, 0);
 	
 	labelSettings = lv_label_create(settings);
-	lv_label_set_text(labelSettings, LV_SYMBOL_SETTINGS);
+	if (screen_number == 1) {
+		lv_label_set_text(labelSettings, LV_SYMBOL_SETTINGS);
+	} else {
+		lv_label_set_text(labelSettings, LV_SYMBOL_HOME);
+	}
 	lv_obj_center(labelSettings);
 }

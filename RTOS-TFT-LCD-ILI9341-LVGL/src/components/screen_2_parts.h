@@ -30,8 +30,9 @@ lv_obj_t *labelHoraValue;
 lv_obj_t *labelMinValue;
 lv_obj_t *labelSegundoValue;
 
-
 static lv_obj_t *img_wheel;
+static lv_obj_t *img_peso;
+static lv_obj_t *img_horario;
 
 typedef struct{
 	const lv_img_dsc_t *horario;
@@ -47,8 +48,8 @@ typedef struct {
 extern QueueHandle_t xQueueHorarioSett, xQueueAro, xQueueWeight;
 
 
-void create_horario_section(lv_obj_t * screen, const lv_font_t *MontAltEL20, const horario_imgs imgs);
-void create_peso_section(lv_obj_t * screen, const lv_font_t *MontAltEL20, const lv_img_dsc_t *img_peso);
+void create_horario_section(lv_obj_t * screen, const lv_font_t *MontAltEL20, const lv_img_dsc_t *img_horario_);
+void create_peso_section(lv_obj_t * screen, const lv_font_t *MontAltEL20, const lv_img_dsc_t *img_peso_);
 void create_aro_section(lv_obj_t *screen, const lv_font_t *MontAltEL20, lv_img_dsc_t *img_rodalogo);
 
 
