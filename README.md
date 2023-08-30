@@ -150,4 +150,4 @@ For the cycling computer interface, we chose to use black and white, which is co
 
 ### Video Demonstrating the Interface
 
-[![Thumbnail do video](http://img.youtube.com/vi/rPx16Y-L4dY/0.jpg)](https://www.youtube.com/watch?v=rPx16
+[![Thumbnail do video](http://img.youtube.com/vi/rPx16Y-L4dY/0.jpg)](https://www.youtube.com/watch?v=rPx16)
