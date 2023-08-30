@@ -1,19 +1,19 @@
-# 21b - APS2 - Embarcados
+# Cycling Computer using SAME-70
 
-O marketing de uma empresa de equipamentos esportivos quer criar um novo ciclocomputador e você foi escolhido como desenvolvedor autônomo, dado seu background técnico e de UX, para criar um protótipo e validar a ideia.
+The marketing team of a sports equipment company wants to create a new cycling computer, and you have been chosen as an independent developer due to your technical and UX background to create a prototype and validate the idea.
 
-Mais detalhes no site da disciplina:
+More details on the course website:
 
-- https://insper.github.io/ComputacaoEmbarcada/navigation/APS/APS-2-Bike/Descricao/
+- [https://insper.github.io/ComputacaoEmbarcada/navigation/APS/APS-2-Bike/Descricao/](https://insper.github.io/ComputacaoEmbarcada/navigation/APS/APS-2-Bike/Descricao/)
 
-## Detalhes
+## Details
 
-Integrantes:
+Members:
 
 - Ricardo Ribeiro Rodrigues
 - Guilherme Fontana Louro
 
-Nome da marca:
+Brand Name:
 
 - Bikometro
 
@@ -21,136 +21,133 @@ Nome da marca:
 
 ## Interface
 
-### Proposta UX 1 - C
+### UX Proposal 1
 
-#### **Primeira proposta de interface**
+#### **First Interface Proposal**
 
-![Primeira proposta de inteface](imgs/print_interface.png)
+![First Interface Proposal](imgs/print_interface.png)
 
-#### **Widgets a serem utilizados**
+#### **Widgets to be Used**
 
-- Para botões, iremos utilizar **Image button (lv_imgbtn)** para utilizar icones como botões.
-- Para a unidade escolhida na segunda tela, será utilizado **Switch (lv_switch)**.
-- Será utilizado **Image (lv_img)** para o logo.
-- Para texto, será utilizado **Label (lv_label)**.
-- Para a escolha do aro, será utilizado o **Roller (lv_roller)**.
-- Para o input do peso, será utilizado o **Slider (lv_slider)**.
+- For buttons, we will use **Image button (lv_imgbtn)** to use icons as buttons.
+- For choosing the unit in the second screen, we will use **Switch (lv_switch)**.
+- We will use **Image (lv_img)** for the logo.
+- For text, we will use **Label (lv_label)**.
+- For choosing the bike rim size, we will use **Roller (lv_roller)**.
+- For inputting weight, we will use **Slider (lv_slider)**.
 
-### Ícone utilizado
+### Icon Used
 - <a href="https://www.flaticon.com/free-icons/pause" title="pause icons">Pause icons created by bqlqn - Flaticon</a>
 
-
-#### **Interface executada no LCD**
-
-<br>
-
-<div style="display: flex; flex-direction: row; justify-content: space-between;">
-
-<img src="imgs/interface_lcd.jpg" alt="Primeira tela da interface no LCD" style="height: 600px;"/>
-<img src="imgs/interface_2_lcd.jpg" alt="Segunda tela da interface no LCD" style="height: 600px;"/>
-
-</div>
-
-<br>
-
-#### **Video explicando a interface**
-
-[![Thumbnail do video](http://img.youtube.com/vi/sO3GiMtXU0I/0.jpg)](https://youtu.be/sO3GiMtXU0I "Video explicando a interface")
-
-### Proposta UX 2 - B
-
-Detalhes da segunda interação da proposta de interface:
-
-#### **Video da entrevista com o Luiz**
-[![Thumbnail do video](http://img.youtube.com/vi/wxNL9mVSqio/0.jpg)](https://youtu.be/wxNL9mVSqio "Video entrevista com o Luiz do FabLab")
-
-A partir do feedback do Luiz, foi feito algumas alterações na interface, como:
-- Maior aproveitamento do espaço da tela, deixando velocidade e botões com mais espaço.
-- Adiciona a possivibilidade de alternar entre as unidades de medida (cm/polegadas).
-- Os botões de alterar o aro da bicicleta alternam entre valores predefinidos.
-- O valor atual do aro da bicicleta é mostrado na tela.
-- Adicionado botão para voltar para tela inicial na segunda tela.
-
-**Vídeo explicando a iteração 1:**
-
-[![Thumbnail do video](http://img.youtube.com/vi/9kr88faDkCg/0.jpg)](https://youtu.be/9kr88faDkCg "Video iteração 1")
-
-#### **Imagem da proposta 2**
-
-![Imagem da proposta 2](imgs/print_interface_2.png)
-
-#### **Interface da proposta 2 executada no LCD**
+#### **Interface Executed on the LCD**
 
 <br>
 
 <div style="display: flex; flex-direction: row; justify-content: space-between;">
 
-<img src="imgs/interface_p2_lcd.jpeg" alt="Primeira tela da segunda interface no LCD" style="height: 600px;"/>
-<img src="imgs/interface_2p2_lcd.jpg" alt="Segunda tela da segunda interface no LCD" style="height: 600px;"/>
+<img src="imgs/interface_lcd.jpg" alt="First screen of the interface on the LCD" style="height: 600px;"/>
+<img src="imgs/interface_2_lcd.jpg" alt="Second screen of the interface on the LCD" style="height: 600px;"/>
 
 </div>
 
 <br>
 
-Nesta iteração, foi decidido também as **fontes e tamanhos** utilizados na interface:
-- Para o logo, foi utilizado a [**fonte Raleway Medium Alt1**](https://fonts.google.com/specimen/Raleway)
-- Para o resto da interface foi utilizado a fonte [**Montserrat Alternates Extralight 200**](https://fonts.google.com/specimen/Montserrat+Alternates?category=Sans+Serif&preview.text=Viagem%20atual&preview.text_type=custom). 
+#### **Video Explaining the Interface**
 
-Tais fontes são futuristas que remetem à tecnologia e são unidas com a simplicidade e design limpo e leve do preto no branco. Dessa forma, é mantido um padrão de duas fontes sans-serif em preto no branco, facilitando a leitura para o usuário no meio de uma viagem de bike.
+[![Video Thumbnail](http://img.youtube.com/vi/sO3GiMtXU0I/0.jpg)](https://youtu.be/sO3GiMtXU0I "Video Explaining the Interface")
 
-**Na imagem abaixo, podemos ver uma foto monstrando os tamanhos e fontes na interface**.
-![Fontes e tamanhos na interface](imgs/fontes_e_tamanhos.PNG)
+### UX Proposal 2
 
-### Proposta UX 3 - A
+Details of the second iteration of the interface proposal:
 
-Detalhes da terceira interação da proposta de interface:
+#### **Video of the Interview with Luiz**
+[![Video Thumbnail](http://img.youtube.com/vi/wxNL9mVSqio/0.jpg)](https://youtu.be/wxNL9mVSqio "Interview Video with Luiz from FabLab")
 
-#### **Video da segunda entrevista**
+Based on Luiz's feedback, some changes were made to the interface, such as:
+- Maximizing screen space, giving more space to speed and buttons.
+- Adding the ability to switch between units of measurement (cm/inches).
+- The bike rim change buttons switch between predefined values.
+- The current bike rim value is displayed on the screen.
+- Added a button to return to the home screen on the second screen.
 
-[![Thumbnail do video](http://img.youtube.com/vi/17jwVoU1Gq0/0.jpg)](https://youtu.be/17jwVoU1Gq0 "Video da entrevista 2")
+**Video Explaining Iteration 1:**
 
-A partir do feedback do entrevistado, foram feitas algumas alterações:
-- Foi adicionada uma parte na interface para mostrar as calorias queimadas no trajeto.
-- Para poder fazer esse cálculo, foi adicionado um campo para o usuário registrar seu peso, conferindo maior precisão ao cálculo das calorias.
-- Adicionado também um campo para registrar o horário atual, para o horário ser mostrado corretamente no display.
-- Alguns reposicionamentos e melhor aproveitamento da tela.
+[![Video Thumbnail](http://img.youtube.com/vi/9kr88faDkCg/0.jpg)](https://youtu.be/9kr88faDkCg "Iteration 1 Video")
 
-**Vídeo explicando a iteração 2:**
+#### **Image of Proposal 2**
 
-[![Thumbnail do video](http://img.youtube.com/vi/wQOLhSUcS_8/0.jpg)](https://youtu.be/wQOLhSUcS_8 "Video iteração 2")
+![Image of Proposal 2](imgs/print_interface_2.png)
 
-#### **Cores**
-
-Para a interface do ciclocomputador, optamos por apostar no preto e branco, que é muito utilizado em interfaces modernas, e traz uma leveza para a interface, tornando-a menos carregada. Pensando nisso, e na indentidade visual moderna da marca, foi preferido este contraste.
-
-#### **Imagem da proposta 3**
-
-![Imagem da proposta 3](imgs/print_interface_3.png)
-
-#### **Interface da proposta 3 executada no LCD**
+#### **Interface of Proposal 2 Executed on the LCD**
 
 <br>
 
 <div style="display: flex; flex-direction: row; justify-content: space-between;">
 
-<img src="imgs/interface_p3_lcd.jpg" alt="Primeira tela da terceira interface no LCD" style="height: 600px;"/>
-<img src="imgs/interface_2p3_lcd.jpg" alt="Segunda tela da terceira interface no LCD" style="height: 600px;"/>
+<img src="imgs/interface_p2_lcd.jpeg" alt="First screen of the second interface on the LCD" style="height: 600px;"/>
+<img src="imgs/interface_2p2_lcd.jpg" alt="Second screen of the second interface on the LCD" style="height: 600px;"/>
 
 </div>
 
 <br>
 
-## Resultado final
+In this iteration, the **fonts and sizes** used in the interface were also decided:
+- For the logo, the [**Raleway Medium Alt1 font**](https://fonts.google.com/specimen/Raleway) was used.
+- For the rest of the interface, the [**Montserrat Alternates Extralight 200 font**](https://fonts.google.com/specimen/Montserrat+Alternates?category=Sans+Serif&preview.text=Viagem%20atual&preview.text_type=custom) was used.
 
+These fonts are futuristic, conveying a sense of technology, and are combined with the simplicity and clean design of black on white. This maintains a consistent look with two sans-serif fonts in black on white, making it easy for the user to read during a bike ride.
+
+**In the image below, you can see a photo showing the sizes and fonts in the interface**.
+![Fonts and Sizes in the Interface](imgs/fontes_e_tamanhos.PNG)
+
+### UX Proposal 3
+
+Details of the third iteration of the interface proposal:
+
+#### **Video of the Second Interview**
+
+[![Video Thumbnail](http://img.youtube.com/vi/17jwVoU1Gq0/0.jpg)](https://youtu.be/17jwVoU1Gq0 "Second Interview Video")
+
+Based on the interviewee's feedback, some changes were made:
+- A section was added to the interface to show the calories burned during the ride.
+- To make this calculation, a field was added for the user to enter their weight, providing greater accuracy to the calorie burn calculation.
+- A field was also added to record the current time, so the time is displayed correctly on the display.
+- Some repositioning and better use of the screen space.
+
+**Video Explaining Iteration 2:**
+
+[![Video Thumbnail](http://img.youtube.com/vi/wQOLhSUcS_8/0.jpg)](https://youtu.be/wQOLhSUcS_8 "Iteration 2 Video")
+
+#### **Colors**
+
+For the cycling computer interface, we chose to use black and white, which is commonly used in modern interfaces and brings a lightness to the interface, making it less cluttered. Considering this and the brand's modern visual identity, this contrast was preferred.
+
+#### **Image of Proposal 3**
+
+![Image of Proposal 3](imgs/print_interface_3.png)
+
+#### **Interface of Proposal 3 Executed on the LCD**
+
+<br>
 
 <div style="display: flex; flex-direction: row; justify-content: space-between;">
 
-<img src="imgs/tela1_final.jpg" alt="Tela 1 da interface" style="height: 580px;"/>
-<img src="imgs/tela2_final.jpg" alt="Tela 2 da interface" style="height: 580px;"/>
+<img src="imgs/interface_p3_lcd.jpg" alt="First screen of the third interface on the LCD" style="height: 600px;"/>
+<img src="imgs/interface_2p3_lcd.jpg" alt="Second screen of the third interface on the LCD" style="height: 600px;"/>
 
 </div>
 
-### Vídeo demonstrando a interface
+<br>
 
-[![Thumbnail do video](http://img.youtube.com/vi/rPx16Y-L4dY/0.jpg)](https://www.youtube.com/watch?v=rPx16Y-L4dY "Video demonstrado a interface")
+## Final Result
 
+<div style="display: flex; flex-direction: row; justify-content: space-between;">
+
+<img src="imgs/tela1_final.jpg" alt="Screen 1 of the interface" style="height: 580px;"/>
+<img src="imgs/tela2_final.jpg" alt="Screen 2 of the interface" style="height: 580px;"/>
+
+</div>
+
+### Video Demonstrating the Interface
+
+[![Thumbnail do video](http://img.youtube.com/vi/rPx16Y-L4dY/0.jpg)](https://www.youtube.com/watch?v=rPx16
